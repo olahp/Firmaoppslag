@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Firmaoppslag</title>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/app.css">
+	</head>
+
+	<body>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 col-md-offset-3">
+					<h1 class="text-center">Firmaoppslag</h1>
+				</div>
+			</div>
+		</div>
+
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 col-md-offset-3">
+					<form id="company-form" class="form" role="form" action="index.html" method="get">
+						<div class="col-xs-8 input-field">
+							<label class="sr-only" for="companyInput">Firmanavn</label>
+							<input name="query" type="text" class="form-control input-lg" id="companyInput" placeholder="Firmanavn">
+						</div>
+						<button type="submit" class="btn btn-primary btn-lg">SØK</button>
+						<button type="button" class="btn btn-danger btn-lg">TØM</button>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 col-md-offset-3 search-results"></div>
+			</div>
+		</div>
+
+		<!-- Mustache template for company container -->
+		<script id="template-company" type="text/x-mustache">
+			<div class="company row">
+				<h2 class="name">
+					{{navn}}
+					<i class="fa fa-minus-square fa-lg"></i>
+				</h2>
+				<div class="info col">
+					<h3 class="orgnr text-center">
+						<small>Organisasjons</small> {{orgnr}} <small>nummer</small>
+					</h3>
+
+					<div class="label col-md-3">Organisasjonsform</div>
+					<div class="data orgform col-md-3">
+						<abbr title="" class="orgform_abbr">{{organisasjonsform}}</abbr>
+					</div>
+
+					<div class="label col-md-3">Næringskode</div>
+					<div class="data nkode col-md-3">
+						<abbr title="" class="nkode_abbr">
+							{{nkode1}}
+						</abbr>
+					</div>
+
+					<div class="label col-md-3">Reg. dato</div>
+					<div class="data col-md-3">{{regdato}}</div>
+
+					<div class="label col-md-3">Konkurs/under avvikling</div>
+					<div class="data col-md-3">{{konkurs}} / {{avvikling}}</div>
+
+					{{#has_businessadr}}
+						<div class="label address col-md-3">Forretningsadresse</div>
+						<div class="data address col-md-9">
+							{{forretningsadr}}, {{forradrpostnr}} {{forradrpoststed}}, {{forradrland}}
+						</div>
+					{{/has_businessadr}}
+
+					{{#has_postadr}}
+						<div class='label address col-md-3'>Postadresse</div>
+						<div class='data address col-md-9'>
+							{{postadresse}}, {{ppostnr}} {{ppoststed}}, {{ppostland}}
+						</div>
+					{{/has_postadr}}
+				</div>
+			</div>
+		</script>
+
+		<script src="js/mustache.js"></script>
+		<script src="js/app.js"></script>
+
+	</body>
+</html>
